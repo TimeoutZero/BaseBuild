@@ -1,6 +1,6 @@
 {
   "name": "basebuild",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Build tool as a node module to be reusable and able to update. Write once, use everywhere! ;)",
   "main": "./src/main.js",
   "files": [
