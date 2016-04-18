@@ -2,7 +2,15 @@
   "name": "basebuild",
   "version": "0.0.1",
   "description": "Build tool as a node module to be reusable and able to update. Write once, use everywhere! ;)",
-  "main": "",
+  "main": "./src/main.js",
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "chalk": "1.1.3",
+    "gulp-util": "3.0.7",
+    "lodash": "4.11.1"
+  },
   "devDependencies": {
     "chai": "3.5.0",
     "gulp": "3.9.1",
@@ -26,7 +34,7 @@
     "base"
   ],
   "author": "carloshpds <carloshpds@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/TimeoutZero/basebuild/issues"
   },
