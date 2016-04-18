@@ -56,13 +56,7 @@ var UtilsModule = function(options) {
    * @return {String} basebuild name
    */
   function getBaseBuildName(onlyText){
-    var text =  chalk.white('[ ' + 'Base Build ' + chalk.underline.red('Angular') + ' ]')  + ' ';
-
-    if(onlyText){
-      text = chalk.white( 'Base Build ' + chalk.underline.red('Angular') );
-    }
-
-    return text;
+    return chalk.white('[ basebuild ]' )  + ' ';
   }
 
   /**
@@ -115,7 +109,8 @@ var UtilsModule = function(options) {
     getBaseBuildName   : getBaseBuildName,
     getTimeoutZeroName : getTimeoutZeroName,
     getRedsparkName    : getRedsparkName,
-    debugLog           : debugLog
+    debugLog           : debugLog,
+    plugins            : nodePlugins
   }
 }
 

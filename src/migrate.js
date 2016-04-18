@@ -1,4 +1,4 @@
-
+'use strict';
 
 /**
  * Basebuild migrate module, to manage deprecated syntax
@@ -7,11 +7,11 @@ var MigrateModule = function(options, mergedOptions) {
   'use strict';
 
   var options       = options || null,
-    utilsModule     = require('../' + mergedOptions.modulesData['utils'].uses)(options),
+    utilsModule     = require('./utils.js')(options),
     mergedOptions   = mergedOptions || null,
     warnedAbout     = {},
     migrateWarnings = [],
-    $               = mergedOptions.plugins;
+    $               = utilsModule.plugins;
 
 
   var migrateMessages = {
@@ -41,7 +41,16 @@ var MigrateModule = function(options, mergedOptions) {
 
 
   function migrateGeneralOptions(){
-
+    migrateWarnProp({
+      obj         : options,
+      prop        : 'modulesData',
+      dotLocation : 'options',
+      value       : options.modulesData,
+      msg         : getMessage({
+        type        : 'soonTo',
+        newValue    : 'modules'
+      })
+    });
   }
 
 
@@ -49,7 +58,7 @@ var MigrateModule = function(options, mergedOptions) {
     args = args || {};
     var message = migrateMessages[args.type];
 
-    for(key in args){
+    for(let key in args){
       message = message.replace('$' + key, $.chalk.red(args[key]) );
     }
 

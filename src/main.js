@@ -28,12 +28,14 @@ var basebuildMainScript = function(options){
   console.log( chalk.bgBlue('This module is under development and it will be available soon ;)') );
   console.log('\n\n');
 
+
   /**
    * Config phase
    */
-  // var configModule   = require('./config.js')();
-  // options            = configModule.setup(options);
-  // var defaultOptions = options.defaultOptions;
+  var configModule   = require('./config.js')();
+  options            = configModule.setup(options);
+  var defaultOptions = options.defaultOptions;
+
 
   /**
    * Utils
