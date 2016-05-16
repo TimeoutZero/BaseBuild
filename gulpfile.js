@@ -1,2 +1,2 @@
 
-require('./src/main.js')();
+require('./gulp/unitTests.js')();
