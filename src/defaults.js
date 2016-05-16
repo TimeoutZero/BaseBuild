@@ -1,5 +1,15 @@
 'use strict';
 
+var nodePlugins = require('gulp-load-plugins')({
+  pattern: [
+    '*',
+    '!gulp',
+    '!protractor'
+  ]
+});
+
+var _ = nodePlugins.lodash;
+
 
 module.exports = function(){
 
@@ -24,6 +34,7 @@ module.exports = function(){
   };
 
 
+  defaultOptions.plugins = nodePlugins;
   defaultOptions.modules = {};
 
 
