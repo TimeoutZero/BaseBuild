@@ -9,7 +9,7 @@ const gutil          = require('gulp-util');
 const packageJSON    = require('../package.json');
 
 
-var basebuildMainScript = function(options){
+var basebuildMainScript = function(options, defaults){
 
   /*
     ==========================
@@ -31,53 +31,51 @@ var basebuildMainScript = function(options){
   /**
    * Config phase
    */
-  // var configModule   = require('./config.js')();
-  // options            = configModule.setup(options);
-  // var defaultOptions = options.defaultOptions;
+  let configModule   = new require('./config.js')(options, defaults);
+  options            = configModule.options;
+  defaults           = options.defaults;
 
   /**
    * Utils
    */
-  // var baseBuildUtils = require(defaultOptions.modulesData['utils'].uses)(options);
-  // var baseBuildName  = baseBuildUtils.getBaseBuildName();
+  let bbUtils        = require('./utils.js')(options);
+  let baseBuildName  = bbUtils.getBaseBuildName();
 
   /*
     ==========================
     Read gulp files
     ==========================
   */
-//   for(key in options.modulesData){
-//     var value      = options.modulesData[key].uses;
-//     var category   = chalk.green(' external ');
-//     var useMode    = '';
+  for(let key in options.modules){
+    let value      = options.modules[key].uses;
+    let category   = chalk.green(' external ');
+    let useMode    = '';
 
-//     !options.modulesData[key] && (options.modulesData[key] = {});
-//     var moduleData = options.modulesData[key];
+    !options.modules[key] && (options.modules[key] = {});
+    let bbModule = options.modules[key];
 
-//     !moduleData.notStart ? (useMode = 'required') : (useMode = 'using');
-//     moduleData.requireName = value;
+    !bbModule.notStart ? (useMode = 'required') : (useMode = 'using');
+    bbModule.requireName = value;
 
-//     if(defaultOptions.modulesData[key] && value === defaultOptions.modulesData[key].defaultValue && !moduleData.isExternal){
-//       category = chalk.cyan(' built-in ');
-//     } else {
-//       moduleData.isDefault  = false;
-//       moduleData.isExternal = true;
-//       moduleData.requireName = process.cwd() + "/" + value;
-//     }
+    if(defaults.modules[key] && value === defaults.modules[key].defaultValue && !bbModule.isExternal){
+      category = chalk.cyan(' built-in ');
+    } else {
+      bbModule.isDefault  = false;
+      bbModule.isExternal = true;
+      bbModule.requireName = process.cwd() + "/" + value;
+    }
 
-//     if(!moduleData.notStart && moduleData.isEnabled  !== false){
-//       var module = require( moduleData.requireName );
-//       _.isFunction(module) && module(options);
+    if(!bbModule.notStart && bbModule.isEnabled  !== false){
+      let moduleFunction = require( bbModule.requireName );
+      _.isFunction(moduleFunction) && moduleFunction(options);
+    }
 
-//     }
+    !bbModule.notLogOnStart && bbModule.isEnabled  !== false && console.log( chalk.white( baseBuildName ) + useMode + category + chalk.magenta(key) + ' module as ' + chalk.magenta(value) );
+  }
 
-//     !moduleData.notLogOnStart && moduleData.isEnabled  !== false && console.log( baseBuildName + useMode + category + chalk.magenta(key) + ' module as ' + chalk.magenta(value) );
+  console.log('\n');
 
-
-//   }
-
-//   console.log('\n');
-}
+};
 
 
 /*

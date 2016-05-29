@@ -24,8 +24,6 @@ var UtilsModule = function(options) {
   var defaultOptions = options.defaultOptions;
   var chalk          = nodePlugins.chalk;
 
-
-
   /*
    * Methods
    */
@@ -56,10 +54,10 @@ var UtilsModule = function(options) {
    * @return {String} basebuild name
    */
   function getBaseBuildName(onlyText){
-    var text =  chalk.white('[ ' + 'Base Build ' + chalk.underline.red('Angular') + ' ]')  + ' ';
+    var text =  chalk.white('[ ' + 'Base Build  ]')  + ' ';
 
     if(onlyText){
-      text = chalk.white( 'Base Build ' + chalk.underline.red('Angular') );
+      text = chalk.white( 'Base Build ' );
     }
 
     return text;
@@ -105,6 +103,7 @@ var UtilsModule = function(options) {
       }
     }
   }
+
 
 
   /**

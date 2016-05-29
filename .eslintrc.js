@@ -14,12 +14,14 @@ module.exports = {
           "experimentalObjectRestSpread": true,
           "jsx": true
       },
-      "sourceType": "module"
+      "sourceType": "module",
   },
   "plugins": [
       "react"
   ],
   "rules": {
+      "no-console" : 0,
+      "no-empty" : 0,
       "linebreak-style": [
           "error",
           "unix"

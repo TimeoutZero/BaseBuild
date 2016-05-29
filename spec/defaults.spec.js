@@ -1,19 +1,19 @@
 'use strict';
 
 describe('Default Options', function(){
-
+   'use strict';
     /*
      * Global Variables
     */
-    let rootPath         = "..";
-    let srcPath              = `${rootPath}/src`;
-    let basebuildNodeModules = "#{rootPath}/node_modules";
+    let rootPath      = "..";
+    let srcPath       = `${rootPath}/src`;
+    // let bbNodeModules = "#{rootPath}/node_modules";
 
     /*
      * Imports
     */
     let defaultOptions = require(`${srcPath}/defaults`)();
-    const _            = require('lodash');
+    // const _            = require('lodash');
 
     const sinon  = require('sinon');
     const chai   = require('chai');
