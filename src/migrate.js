@@ -1,12 +1,6 @@
 'use strict';
 
 /**
- * Imports
- */
-let utilsModule = null;
-let $           = null;
-
-/**
  * Basebuild's migrate module, to manage deprecated syntax
  */
 class MigrateModule {
@@ -46,7 +40,16 @@ class MigrateModule {
 
 
   migrateGeneralOptions(){
-
+    this.migrateWarnProp({
+      obj         : this.mergedOptions,
+      prop        : 'modulesData',
+      dotLocation : 'options',
+      value       : this.mergedOptions.modulesData,
+      msg         : getMessage({
+        type        : 'soonTo',
+        newValue    : 'modules'
+      })
+    });
   }
 
 

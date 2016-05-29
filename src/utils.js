@@ -54,13 +54,7 @@ var UtilsModule = function(options) {
    * @return {String} basebuild name
    */
   function getBaseBuildName(onlyText){
-    var text =  chalk.white('[ ' + 'Base Build  ]')  + ' ';
-
-    if(onlyText){
-      text = chalk.white( 'Base Build ' );
-    }
-
-    return text;
+    return chalk.white('[ basebuild ]' )  + ' ';
   }
 
   /**
@@ -114,7 +108,8 @@ var UtilsModule = function(options) {
     getBaseBuildName   : getBaseBuildName,
     getTimeoutZeroName : getTimeoutZeroName,
     getRedsparkName    : getRedsparkName,
-    debugLog           : debugLog
+    debugLog           : debugLog,
+    plugins            : nodePlugins
   }
 }
 
