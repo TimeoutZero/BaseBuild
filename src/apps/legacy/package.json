@@ -1,0 +1,44 @@
+{
+  "name": "basebuild",
+  "version": "0.0.2",
+  "description": "Build tool as a node module to be reusable and able to update. Write once, use everywhere! ;)",
+  "main": "./src/main.js",
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "chalk": "1.1.3",
+    "gulp-load-plugins": "1.2.2",
+    "gulp-util": "3.0.7",
+    "gulp-load-plugins": "^1.1.0",
+    "lodash": "4.11.1"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "gulp": "3.9.1",
+    "gulp-istanbul": "0.10.4",
+    "gulp-mocha": "2.2.0",
+    "sinon": "1.17.3"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimeoutZero/basebuild.git"
+  },
+  "keywords": [
+    "basebuid",
+    "timeout",
+    "timeoutzero",
+    "zero",
+    "build",
+    "base"
+  ],
+  "author": "carloshpds <carloshpds@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TimeoutZero/basebuild/issues"
+  },
+  "homepage": "https://github.com/TimeoutZero/basebuild#readme"
+}
