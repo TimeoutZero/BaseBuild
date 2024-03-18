@@ -1,0 +1,30 @@
+{
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "importHelpers": true,
+    "outDir": "dist",
+    "rootDir": "./src/apps/module",
+    "strict": false,
+    "resolveJsonModule": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": false,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/apps/module/*"
+      ]
+    }
+  },
+  "include": [
+    "./src/apps/module/**/*.ts"
+  ],
+  "ts-node": {
+    "esm": true
+  },
+  "types": [
+    "node",
+    "vite"
+  ]
+}

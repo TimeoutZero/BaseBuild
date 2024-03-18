@@ -1,2 +1,2 @@
 # basebuild
-Build tool as a node module to be reusable and able to update. Write once, use everywhere! ;)
+Basebuild is the core project to build your own vite ecossystem. Write once, use everywhere! ;)

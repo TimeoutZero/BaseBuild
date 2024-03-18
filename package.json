@@ -1,27 +1,27 @@
 {
   "name": "basebuild",
-  "version": "0.0.2",
-  "description": "Build tool as a node module to be reusable and able to update. Write once, use everywhere! ;)",
-  "main": "./src/main.js",
-  "files": [
-    "src"
-  ],
+  "description": "Basebuild is the core project to build your own vite ecossystem.",
+  "private": true,
+  "version": "2.0.0-alpha.0",
+  "type": "module",
+  "main": "dist/src/apps/module/core/index.js",
+  "module": "dist/src/apps/module/core/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "shx rm -rf dist && tsc -b",
+    "dev": "tsc -w",
+    "prelink": "yarn build"
+  },
   "dependencies": {
-    "chalk": "1.1.3",
-    "gulp-load-plugins": "1.2.2",
-    "gulp-util": "3.0.7",
-    "gulp-load-plugins": "^1.1.0",
-    "lodash": "4.11.1"
+    "debug": "^4.3.4",
+    "rollup-plugin-copy": "^3.5.0",
+    "vite": "5.1.6"
   },
   "devDependencies": {
-    "chai": "3.5.0",
-    "gulp": "3.9.1",
-    "gulp-istanbul": "0.10.4",
-    "gulp-mocha": "2.2.0",
-    "sinon": "1.17.3"
-  },
-  "scripts": {
-    "test": "gulp test"
+    "@tsconfig/node20": "20.1.2",
+    "@types/node": "20.11.28",
+    "shx": "^0.3.4",
+    "typescript": "^5.2.2"
   },
   "repository": {
     "type": "git",
@@ -36,7 +36,6 @@
     "base"
   ],
   "author": "carloshpds <carloshpds@gmail.com>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/TimeoutZero/basebuild/issues"
   },
