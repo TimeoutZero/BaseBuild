@@ -1,8 +1,17 @@
 import { ConfigEnv, UserConfig } from "vite";
 
-export interface BasebuildWebExtensionsInitializeOptions {
+export interface BasebuildInitializeByViteOptions {
   viteEnv: ConfigEnv
-  defaultBBViteConfig: UserConfig
+  _defaultBasebuildViteConfig: UserConfig // core default vite config
+  defaultBasebuidConfig: UserConfig // basebuilded's default vite config
 }
 
-export type hosterViteConfigFn = (options: BasebuildWebExtensionsInitializeOptions) => UserConfig
+export interface BasebuildInitiazeOptions {
+  ecossystem: 'vite'
+  configBuilder?: basebuildConfigBuilderFn
+}
+
+export type basebuildEcossystemsBuildersOptions = BasebuildInitializeByViteOptions
+
+//export type basebuildConfigBuilderFn = (options: BasebuildInitializeByViteOptions) => UserConfig
+export type basebuildConfigBuilderFn = (options: basebuildEcossystemsBuildersOptions) => UserConfig

@@ -1,16 +1,14 @@
-import deepAssign from '../utils/deepAssign.js'
-import vue from '@vitejs/plugin-vue'
+import deepAssign from '../../../utils/deepAssign.js'
 import { UserConfig, loadEnv, ConfigEnv, defineConfig, UserConfigFnObject } from 'vite'
 import debug from 'debug'
-import { hosterViteConfigFn } from './types.js'
+import { basebuildConfigBuilderFn } from '../../types.js'
 
+const log = debug('basebuild:vite-config')
 
-const log = debug('bbWebExtensions:vite-config')
-
-const buildBBViteConfig = ({ command, mode }: ConfigEnv) => {
+const buildBasebuildViteConfig = ({ command, mode }: ConfigEnv) => {
   const env = loadEnv(mode, process.cwd(), '')
   const viteConfig: UserConfig = {
-    plugins: [vue()],
+    plugins: [],
     define: {
       'process.env.BB_PRODUCT': env.BB_PRODUCT ? JSON.stringify(env.BB_PRODUCT) : '"EXTENSION"',
       'process.env.BB_ENV': env.NODE_ENV ? JSON.stringify(env.NODE_ENV) : '"development"',
@@ -21,13 +19,14 @@ const buildBBViteConfig = ({ command, mode }: ConfigEnv) => {
   return viteConfig
 }
 
-export const buildBBViteConfigFunction = (hosterViteConfigFunction?: hosterViteConfigFn) => {
+export const buildBasebuildViteConfigFunction = (hosterViteConfigBuilderFunction?: basebuildConfigBuilderFn) => {
   return (configEnv: ConfigEnv): UserConfig => {
-    const bbViteConfig = buildBBViteConfig(configEnv)
+    const bbViteConfig = buildBasebuildViteConfig(configEnv)
     const mergedConfig = {}
-    const hosterViteConfig = hosterViteConfigFunction?.({
+    const hosterViteConfig = hosterViteConfigBuilderFunction?.({
       viteEnv: configEnv,
-      defaultBBViteConfig: bbViteConfig
+      _defaultBasebuildViteConfig: bbViteConfig,
+      // TODO: como o basebuild, o basebuildChild podem ter configurações default ao mesmo tempo que o hoster também pode manipular a config?
     }) || {}
 
     deepAssign(mergedConfig, bbViteConfig, hosterViteConfig)
@@ -37,4 +36,4 @@ export const buildBBViteConfigFunction = (hosterViteConfigFunction?: hosterViteC
   }
 }
 
-export default buildBBViteConfigFunction
+export default buildBasebuildViteConfigFunction
