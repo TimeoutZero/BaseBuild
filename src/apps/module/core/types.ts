@@ -1,17 +1,16 @@
-import { ConfigEnv, UserConfig } from "vite";
+import { UserConfig } from "vite";
+import { basebuildCoreConfigSystemFnReturnViteConfig, BasebuildCoreConfigSystemFnViteOptions } from "./strategies/vite/types";
 
-export interface BasebuildInitializeByViteOptions {
-  viteEnv: ConfigEnv
-  _defaultBasebuildViteConfig: UserConfig // core default vite config
-  defaultBasebuidConfig: UserConfig // basebuilded's default vite config
+export type BasebuildCoreConfigSystemFnOptions = BasebuildCoreConfigSystemFnViteOptions
+export type BasebuildCoreConfigSystemFnReturn = basebuildCoreConfigSystemFnReturnViteConfig
+
+export type BasebuildCoreConfigSystemFn = (options: BasebuildCoreConfigSystemFnOptions) => BasebuildCoreConfigSystemFnReturn
+export type BasebuildCoreConfigSystemObject = UserConfig
+
+export type BasebuildCoreConfigs = Array<BasebuildCoreConfigSystemFn | BasebuildCoreConfigSystemObject>
+export interface BasebuildCoreInitiazeOptions {
+  configSystem?: 'vite'
+  configs: BasebuildCoreConfigs
 }
 
-export interface BasebuildInitiazeOptions {
-  ecossystem: 'vite'
-  configBuilder?: basebuildConfigBuilderFn
-}
 
-export type basebuildEcossystemsBuildersOptions = BasebuildInitializeByViteOptions
-
-//export type basebuildConfigBuilderFn = (options: BasebuildInitializeByViteOptions) => UserConfig
-export type basebuildConfigBuilderFn = (options: basebuildEcossystemsBuildersOptions) => UserConfig
