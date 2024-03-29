@@ -1,15 +1,24 @@
-import { ConfigEnv, UserConfig, UserConfigFnObject, UserConfig as ViteUserConfig } from 'vite'
-import { defineConfig, loadEnv } from 'vite'
-import { buildBBViteConfigFunction  } from './vite.config.js'
 import debug from 'debug'
 import './types.js'
-import { hosterViteConfigFn } from './types.js'
+import { BasebuildCoreInitiazeOptions } from './types.js'
+import initializeByVite from './strategies/vite/initializeByVite.js'
 
-const log = debug('bbWebExtensions:module:core')
+const log = debug('basebuild:module:core')
 
-export const bbWebExtensions = (hosterViteConfigFunction?: hosterViteConfigFn) => {
-  const bbViteConfigFunction = buildBBViteConfigFunction(hosterViteConfigFunction)
-  const finalViteConfig = defineConfig(bbViteConfigFunction)
+const initializeStrategies = {
+  vite: initializeByVite
+}
+
+export const startBasebuild = (inializeOptions?: BasebuildCoreInitiazeOptions) => {
+  if (!inializeOptions?.configs?.length) {
+    throw new Error('configs array is required')
+  }
+
+  const strategy = initializeStrategies[inializeOptions.configSystem || 'vite']
+  const finalViteConfig = strategy(inializeOptions?.configs)
+
   log('finalViteConfig', finalViteConfig)
   return finalViteConfig
 }
+
+export default startBasebuild
