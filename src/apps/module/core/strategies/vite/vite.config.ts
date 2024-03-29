@@ -1,38 +1,42 @@
 import deepAssign from '../../../utils/deepAssign.js'
-import { UserConfig, loadEnv, ConfigEnv, defineConfig, UserConfigFnObject } from 'vite'
+import { UserConfig, loadEnv, ConfigEnv } from 'vite'
 import debug from 'debug'
-import { basebuildConfigBuilderFn } from '../../types.js'
+import { BasebuildCoreConfigs } from '../../types.js'
 
 const log = debug('basebuild:vite-config')
 
-const buildBasebuildViteConfig = ({ command, mode }: ConfigEnv) => {
+const buildDefaultBasebuildViteConfig = ({ command, mode }: ConfigEnv) => {
   const env = loadEnv(mode, process.cwd(), '')
   const viteConfig: UserConfig = {
     plugins: [],
     define: {
-      'process.env.BB_PRODUCT': env.BB_PRODUCT ? JSON.stringify(env.BB_PRODUCT) : '"EXTENSION"',
       'process.env.BB_ENV': env.NODE_ENV ? JSON.stringify(env.NODE_ENV) : '"development"',
-      'process.env.BB_BROWSER': env.BB_BROWSER ? JSON.stringify(env.BB_BROWSER) : '"chromium"',
     }
   }
 
   return viteConfig
 }
 
-export const buildBasebuildViteConfigFunction = (hosterViteConfigBuilderFunction?: basebuildConfigBuilderFn) => {
+export const buildBasebuildViteConfigFunction = (configs: BasebuildCoreConfigs) => {
   return (configEnv: ConfigEnv): UserConfig => {
-    const bbViteConfig = buildBasebuildViteConfig(configEnv)
-    const mergedConfig = {}
-    const hosterViteConfig = hosterViteConfigBuilderFunction?.({
-      viteEnv: configEnv,
-      _defaultBasebuildViteConfig: bbViteConfig,
-      // TODO: como o basebuild, o basebuildChild podem ter configurações default ao mesmo tempo que o hoster também pode manipular a config?
-    }) || {}
+    const bbDefaultViteConfig = buildDefaultBasebuildViteConfig(configEnv)
 
-    deepAssign(mergedConfig, bbViteConfig, hosterViteConfig)
-    log('mergedConfig', mergedConfig)
+    const finalConfig: UserConfig = configs.reduce((mergedConfig, config) => {
+      let buildedConfig = config as UserConfig
 
-    return mergedConfig
+      if (typeof config === 'function') {
+        buildedConfig = config?.({
+          ...configEnv,
+          basebuildDefaults: mergedConfig as UserConfig,
+        }) as UserConfig
+      }
+
+      deepAssign(mergedConfig, buildedConfig)
+      return mergedConfig as UserConfig
+    }, bbDefaultViteConfig) as UserConfig
+
+    log('[pre-defineConfig] final vite config', finalConfig)
+    return finalConfig
   }
 }
 
