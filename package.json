@@ -1,11 +1,11 @@
 {
   "name": "basebuild",
-  "description": "Basebuild is the core project to build your own vite ecossystem.",
+  "description": "Basebuild is the core project to build your own dev ecosystem.",
   "private": true,
   "version": "2.0.0-alpha.0",
   "type": "module",
-  "main": "dist/src/apps/module/core/index.js",
-  "module": "dist/src/apps/module/core/index.js",
+  "main": "dist/core/index.js",
+  "module": "dist/core/index.js",
   "license": "MIT",
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
