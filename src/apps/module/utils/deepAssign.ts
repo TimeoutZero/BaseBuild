@@ -19,7 +19,7 @@ function mergeObjects(target: any, source: any): void {
         !Array.isArray(targetValue)
       ) {
         mergeObjects(targetValue, sourceValue);
-      } else {
+      } else if (sourceValue !== undefined) {
         target[key] = sourceValue;
       }
     }
