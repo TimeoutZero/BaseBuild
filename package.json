@@ -3,6 +3,7 @@
   "description": "Basebuild is the core project to build your own dev ecosystem.",
   "private": true,
   "version": "2.0.0-alpha.0",
+  "packageManager": "yarn@4.1.1",
   "type": "module",
   "main": "dist/core/index.js",
   "module": "dist/core/index.js",
@@ -33,7 +34,9 @@
     "timeoutzero",
     "zero",
     "build",
-    "base"
+    "base",
+    "frontend",
+    "vite"
   ],
   "author": "carloshpds <carloshpds@gmail.com>",
   "bugs": {
