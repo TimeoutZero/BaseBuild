@@ -14,7 +14,7 @@
   "exports": {
     ".": {
       "import": "./dist/core/index.js",
-      "types": "./dist/types/core/index.js",
+      "types": "./dist/types/core/index.d.ts",
       "require": "./dist/core/index.js"
     },
     "./core/*": {
