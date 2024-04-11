@@ -2,8 +2,8 @@
   "name": "basebuild",
   "description": "Basebuild is the core project to build your own dev ecosystem.",
   "private": true,
-  "version": "2.0.0-alpha.0",
-  "packageManager": "yarn@4.1.1",
+  "version": "2.0.0-beta.0",
+  "packageManager": "yarn@1.22.19",
   "type": "module",
   "main": "dist/core/index.js",
   "module": "dist/core/index.js",
@@ -50,8 +50,10 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "shx rm -rf dist && tsc -b",
+    "start": "yarn dev",
     "dev": "tsc -w",
+    "prepublishOnly": "yarn build",
+    "build": "shx rm -rf dist && tsc -b",
     "prelink": "yarn build"
   },
   "dependencies": {
