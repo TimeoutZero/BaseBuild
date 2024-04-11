@@ -1,4 +1,3 @@
-# basebuild
 ![logo](src/assets/logo/logo.png)
 <p align="center">basebuild is the core project to build your own dev ecosystem.</p>
 <p align="center">Write once, use everywhere at once! ;)</p>
@@ -32,48 +31,73 @@ basebuild will have strategies to different ecosystems and for now we're startin
     This is limitless, so let's see what the community can do.
   </p>
 </details>
+<br />
 
 # Usage
 ## Vite's Ecosystem Example
 
-`To create a basebuild child project like 'basebuild-vue'`
+`To only aggregate config objects or config functions`
 ```typescript
 import basebuild from 'basebuild'
-import vue from '@vitejs/plugin-vue'
-import { UserConfig } from 'vite'
 
-export const basebuildVue = (userConfig: UserConfig) => {
-
-  const bbVueConfigFn = ({ command, basebuildDefaults }) => {
-    return {
-      plugins: [
-        ...basebuildDefaults.plugins, // rollup-plugin-copy plugin
-        vue()
-      ]
-    }
-  }
-
-  return basebuild({
-    configSystem: 'vite',
-    configs: [
-      bbVueConfigFn,
-      userConfig
-    ]
-  })
-}
-```
-
-`To use the basebuild child project in vite.config.ts`
-```typescript
-import basebuildVue from 'basebuild-vue'
-import { splitVendorChunkPlugin } from 'vite'
-
-export default basebuildVue(({ command, basebuildDefaults }) => {
-  return {
-    plugins: [
-      ...basebuildDefaults.plugins,
-      splitVendorChunkPlugin()
-    ] // now it should be [rollup-plugin-copy, vite-plugin-vue, vite-plugin-split-vendor-chunk]
-  }
+basebuild({
+  configSystem: 'vite',
+  configs: [
+    configFunction1,
+    configObject2,
+    configFunction3,
+  ]
 })
 ```
+
+### Other Cases
+<details>
+  <summary>To create a basebuild child project like 'basebuild-vue'</summary>
+
+  ```typescript
+    import basebuild from 'basebuild'
+    import vue from '@vitejs/plugin-vue'
+    import { UserConfig } from 'vite'
+
+    export const basebuildVue = (userConfig: UserConfig) => {
+
+      const bbVueConfigFn = ({ command, basebuildDefaults }) => {
+        return {
+          plugins: [
+            ...basebuildDefaults.plugins, // rollup-plugin-copy plugin
+            vue()
+          ]
+        }
+      }
+
+      return basebuild({
+        configSystem: 'vite',
+        configs: [
+          bbVueConfigFn,
+          userConfig
+        ]
+      })
+    }
+  ```
+
+</details>
+
+
+
+<details>
+  <summary>To use the basebuild child project in vite.config.ts</summary>
+
+  ```typescript
+    import basebuildVue from 'basebuild-vue'
+    import { splitVendorChunkPlugin } from 'vite'
+
+    export default basebuildVue(({ command, basebuildDefaults }) => {
+      return {
+        plugins: [
+          ...basebuildDefaults.plugins,
+          splitVendorChunkPlugin()
+        ] // now it should be [rollup-plugin-copy, vite-plugin-vue, vite-plugin-split-vendor-chunk]
+      }
+    })
+  ```
+</details>
