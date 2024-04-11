@@ -1,27 +1,69 @@
 {
   "name": "basebuild",
-  "version": "0.0.2",
-  "description": "Build tool as a node module to be reusable and able to update. Write once, use everywhere! ;)",
-  "main": "./src/main.js",
+  "description": "Basebuild is the core project to build your own dev ecosystem.",
+  "private": true,
+  "version": "2.0.0-alpha.0",
+  "packageManager": "yarn@4.1.1",
+  "type": "module",
+  "main": "dist/core/index.js",
+  "module": "dist/core/index.js",
+  "types": "dist/types/core/index.d.ts",
   "files": [
-    "src"
+    "dist",
+    "README.md"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/core/index.js",
+      "types": "./dist/types/core/index.d.ts",
+      "require": "./dist/core/index.js"
+    },
+    "./core/*": {
+      "import": "./dist/core/*",
+      "types": "./dist/types/core/*",
+      "require": "./dist/core/*"
+    },
+    "./plugins": {
+      "import": "./dist/plugins/index.js",
+      "types": "./dist/types/plugins/index.js",
+      "require": "./dist/plugins/index.js"
+    },
+    "./plugins/*": {
+      "import": "./dist/plugins/*",
+      "types": "./dist/types/plugins/*",
+      "require": "./dist/plugins/*"
+    },
+    "./utils": {
+      "import": "./dist/utils/index.js",
+      "types": "./dist/types/utils/index.js",
+      "require": "./dist/utils/index.js"
+    },
+    "./utils/*": {
+      "import": "./dist/utils/*",
+      "types": "./dist/types/utils/*",
+      "require": "./dist/utils/*"
+    },
+    "./types/*": {
+      "types": "./dist/types/*"
+    },
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "shx rm -rf dist && tsc -b",
+    "dev": "tsc -w",
+    "prelink": "yarn build"
+  },
   "dependencies": {
-    "chalk": "1.1.3",
-    "gulp-load-plugins": "1.2.2",
-    "gulp-util": "3.0.7",
-    "gulp-load-plugins": "^1.1.0",
-    "lodash": "4.11.1"
+    "debug": "4.3.4",
+    "rollup-plugin-copy": "3.5.0",
+    "vite": "5.1.6"
   },
   "devDependencies": {
-    "chai": "3.5.0",
-    "gulp": "3.9.1",
-    "gulp-istanbul": "0.10.4",
-    "gulp-mocha": "2.2.0",
-    "sinon": "1.17.3"
-  },
-  "scripts": {
-    "test": "gulp test"
+    "@tsconfig/node20": "20.1.2",
+    "@types/node": "20.11.28",
+    "shx": "^0.3.4",
+    "typescript": "^5.2.2"
   },
   "repository": {
     "type": "git",
@@ -33,10 +75,14 @@
     "timeoutzero",
     "zero",
     "build",
-    "base"
+    "base",
+    "frontend",
+    "vite",
+    "hmr",
+    "dev-server",
+    "build-tool"
   ],
   "author": "carloshpds <carloshpds@gmail.com>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/TimeoutZero/basebuild/issues"
   },
