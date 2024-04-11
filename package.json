@@ -1,7 +1,6 @@
 {
-  "name": "basebuild",
+  "name": "@bebasebuild/basebuild",
   "description": "Basebuild is the core project to build your own dev ecosystem.",
-  "private": true,
   "version": "2.0.0-beta.0",
   "packageManager": "yarn@1.22.19",
   "type": "module",
