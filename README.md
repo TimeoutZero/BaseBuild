@@ -17,23 +17,25 @@ basebuild will have strategies to different ecosystems and for now we're startin
   <p>
     Now we can move to the future on the fly. On the past road, we've past through Gulp's scripts as main resource to create a dev server and build system replicable, but module bundlers have been created and emerged in a surprising and dominant way as the most powerful frontend tool to evolve the present using future core features by loaders, plugins and etc.
 
-So, we cannot guess how the future will be like, but we can be resilient with it. The basebuild's core module now have the mission to adapt configurations to different ecosystems of module bundlers in the recursive way and by different layers.
+    So, we cannot guess how the future will be like, but we can be resilient with it. The basebuild's core module now have the mission to adapt configurations to different ecosystems of module bundlers in the recursive way and by different layers.
 
-So this way you can create your own project's ecosystem based on your favorite module bundler settings.
+    So this way you can create your own project's ecosystem based on your favorite module bundler settings.
 
 
-**This means that you can create a node package centralizing all development environment and all build flux of multiple projects**
+    **This means that you can create a node package centralizing all development environment and all build flux of multiple projects**
 
-Some direct basebuildfieds projects will be created for open source community on Vite's ecosystem:
-* basebuild-web-extensions: Focus to develop browsers extensions (Mainly Chrome Extensions)
-* basebuild-angular: Full rewrite of old package to Vite's system and Angular's apps development.
-* basebuild-vue: Focus to develop Vue.js apps
+    Some direct basebuildfieds projects will be created for open source community on Vite's ecosystem:
+    * basebuild-web-extensions: Focus to develop browsers extensions (Mainly Chrome Extensions)
+    * basebuild-angular: Full rewrite of old package to Vite's system and Angular's apps development.
+    * basebuild-vue: Focus to develop Vue.js apps
 
-This is limitless, so let's see what the community can do.
+    This is limitless, so let's see what the community can do.
   </p>
 </details>
 
 # Usage
+## Vite's Ecosystem Example
+
 `To create a basebuild child project like 'basebuild-vue'`
 ```typescript
 import basebuild from 'basebuild'
