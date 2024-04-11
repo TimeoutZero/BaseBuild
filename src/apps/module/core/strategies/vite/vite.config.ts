@@ -5,21 +5,14 @@ import { BasebuildCoreConfigs } from '../../types.js'
 
 const log = debug('basebuild:vite-config')
 
-const buildDefaultBasebuildViteConfig = ({ command, mode }: ConfigEnv) => {
-  const env = loadEnv(mode, process.cwd(), '')
-  const viteConfig: UserConfig = {
-    plugins: [],
-    define: {
-      'process.env.BB_ENV': env.NODE_ENV ? JSON.stringify(env.NODE_ENV) : '"development"',
-    }
-  }
-
+const createBasebuildViteConfig = ({ command, mode }: ConfigEnv) => {
+  const viteConfig: UserConfig = {}
   return viteConfig
 }
 
 export const buildBasebuildViteConfigFunction = (configs: BasebuildCoreConfigs) => {
   return (configEnv: ConfigEnv): UserConfig => {
-    const bbDefaultViteConfig = buildDefaultBasebuildViteConfig(configEnv)
+    const bbDefaultViteConfig = createBasebuildViteConfig(configEnv)
 
     const finalConfig: UserConfig = configs.reduce((mergedConfig, config) => {
       let buildedConfig = config as UserConfig
@@ -36,6 +29,7 @@ export const buildBasebuildViteConfigFunction = (configs: BasebuildCoreConfigs) 
     }, bbDefaultViteConfig) as UserConfig
 
     log('[pre-defineConfig] final vite config', finalConfig)
+    log('[build] rollup options', finalConfig.build.rollupOptions)
     return finalConfig
   }
 }
