@@ -1,9 +1,12 @@
 {
   "name": "@bebasebuild/basebuild",
   "description": "basebuild is the core project to build your own dev ecosystem.",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "packageManager": "yarn@1.22.19",
   "type": "module",
+  "engines": {
+    "node": ">=14.21.3"
+  },
   "main": "dist/core/index.js",
   "module": "dist/core/index.js",
   "types": "dist/types/core/index.d.ts",
