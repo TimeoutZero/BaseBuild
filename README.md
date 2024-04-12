@@ -8,6 +8,8 @@
 We're moving to a new approach, now we can create multiple ecosystems in the agnostic way.
 basebuild will have strategies to different ecosystems and for now we're starting on Vite's context.
 
+> It makes your vite config reusable between your projects.
+
 # 🧐 WHY
 > Now you can create your own project's ecosystem based on your favorite module bundler settings.
 
