@@ -38,7 +38,7 @@ basebuild will have strategies to different ecosystems and for now we're startin
 
 `To only aggregate config objects or config functions`
 ```typescript
-import basebuild from 'basebuild'
+import basebuild from '@bebasebuild/basebuild'
 
 basebuild({
   configSystem: 'vite',
@@ -52,10 +52,10 @@ basebuild({
 
 ### Other Cases
 <details>
-  <summary>To create a basebuild child project like 'basebuild-vue'</summary>
+  <summary>To create a basebuild child project like '@bebasebuild/basebuild-vue'</summary>
 
   ```typescript
-    import basebuild from 'basebuild'
+    import basebuild from '@bebasebuild/basebuild'
     import vue from '@vitejs/plugin-vue'
     import { UserConfig } from 'vite'
 
@@ -88,7 +88,7 @@ basebuild({
   <summary>To use the basebuild child project in vite.config.ts</summary>
 
   ```typescript
-    import basebuildVue from 'basebuild-vue'
+    import basebuildVue from '@bebasebuild/basebuild-vue'
     import { splitVendorChunkPlugin } from 'vite'
 
     export default basebuildVue(({ command, basebuildDefaults }) => {

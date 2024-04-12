@@ -1,7 +1,7 @@
 {
   "name": "@bebasebuild/basebuild",
-  "description": "Basebuild is the core project to build your own dev ecosystem.",
-  "version": "2.0.0-beta.0",
+  "description": "basebuild is the core project to build your own dev ecosystem.",
+  "version": "2.0.0-beta.1",
   "packageManager": "yarn@1.22.19",
   "type": "module",
   "main": "dist/core/index.js",
@@ -68,24 +68,26 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TimeoutZero/basebuild.git"
+    "url": "git+https://github.com/bebasebuild/basebuild.git"
   },
   "keywords": [
-    "basebuid",
-    "timeout",
-    "timeoutzero",
-    "zero",
+    "bebasebuild",
+    "basebuild",
     "build",
     "base",
     "frontend",
+    "front-end",
     "vite",
     "hmr",
     "dev-server",
     "build-tool"
   ],
   "author": "carloshpds <carloshpds@gmail.com>",
+  "contributors": [
+    "carloshpds <carloshpds@gmail.com>"
+  ],
   "bugs": {
-    "url": "https://github.com/TimeoutZero/basebuild/issues"
+    "url": "https://github.com/bebasebuild/basebuild/issues"
   },
-  "homepage": "https://github.com/TimeoutZero/basebuild#readme"
+  "homepage": "https://github.com/bebasebuild/basebuild#readme"
 }
