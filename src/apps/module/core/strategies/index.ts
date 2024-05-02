@@ -1,4 +1,4 @@
-import initializeByVite from "./vite/initializeByVite.js";
+import initializeByVite from "./vite/initializeByVite";
 
 const initializeStrategies = {
   vite: initializeByVite
