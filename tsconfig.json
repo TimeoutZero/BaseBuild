@@ -16,16 +16,30 @@
       "@/*": [
         "src/apps/module/*"
       ]
-    }
+    },
+    "types": [
+      "node",
+      "vite",
+      "jest"
+    ]
   },
   "include": [
     "./src/apps/module/**/*.ts"
   ],
   "ts-node": {
-    "esm": true
+    "esm": true,
+    "jest": true
   },
   "types": [
     "node",
-    "vite"
-  ]
+    "vite",
+    "jest"
+  ],
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "tsconfig": "tsconfig.json"
+      }
+    }
+  }
 }
