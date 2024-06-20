@@ -11,6 +11,7 @@ const config: Config = {
   preset: 'ts-jest',
   testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
   testPathIgnorePatterns: ["/node_modules/", "/dist/", "/src/apps/legacy/"],
+  reporters: ['default'],
 };
 
 export default config;

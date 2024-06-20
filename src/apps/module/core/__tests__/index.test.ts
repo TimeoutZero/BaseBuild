@@ -19,7 +19,7 @@ const commonJestFnForObjectsParams = (args) => {
 
 describe(`basebuildfy`, () => {
 
-  describe(`when configs is empty`, () => {
+  describe(`when configs array is empty`, () => {
     it(`throw an error`, () => {
       expect(() => basebuildfy()).toThrowError('configs array is required')
     })

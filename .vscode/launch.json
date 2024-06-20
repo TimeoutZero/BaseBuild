@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Attach to Process",
+      "name": "Attach to Tests",
       "port": 9229,
       "request": "attach",
       "skipFiles": [
