@@ -1,7 +1,7 @@
-import deepAssign from '../../../utils/deepAssign.js'
+import deepAssign from '../../../utils/deepAssign'
 import { UserConfig, loadEnv, ConfigEnv } from 'vite'
 import debug from 'debug'
-import { BasebuildCoreConfigs } from '../../types.js'
+import { BasebuildCoreConfigs } from '../../types'
 
 const log = debug('basebuild:vite-config')
 
@@ -29,7 +29,7 @@ export const buildBasebuildViteConfigFunction = (configs: BasebuildCoreConfigs) 
     }, bbDefaultViteConfig) as UserConfig
 
     log('[pre-defineConfig] final vite config', finalConfig)
-    log('[build] rollup options', finalConfig.build.rollupOptions)
+    log('[build] rollup options', finalConfig.build?.rollupOptions)
     return finalConfig
   }
 }

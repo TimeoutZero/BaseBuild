@@ -1,11 +1,10 @@
 import debug from 'debug'
-import './types.js'
 import { BasebuildCoreInitiazeOptions } from './types.js'
-import initializeStrategies from './strategies/index.js'
+import initializeStrategies from './strategies/index'
 
 const log = debug('basebuild:module:core')
 
-export const basebuildfy = (inializeOptions?: BasebuildCoreInitiazeOptions) => {
+export const basebuildfy = (inializeOptions: BasebuildCoreInitiazeOptions = { configs: [] }) => {
   const configSystem = inializeOptions?.configSystem || 'vite'
   if (!inializeOptions?.configs?.length) {
     throw new Error('configs array is required')

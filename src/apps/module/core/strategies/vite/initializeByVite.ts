@@ -1,6 +1,6 @@
 import { UserConfigFnObject, defineConfig } from "vite"
-import buildBasebuildViteConfigFunction from "./vite.config.js"
-import { BasebuildCoreConfigs } from "../../../core/types.js"
+import buildBasebuildViteConfigFunction from "./vite.config"
+import { BasebuildCoreConfigs } from "../../../core/types"
 
 const initializeByVite = (configs: BasebuildCoreConfigs): UserConfigFnObject => {
   const bbViteConfigFunction = buildBasebuildViteConfigFunction(configs)
