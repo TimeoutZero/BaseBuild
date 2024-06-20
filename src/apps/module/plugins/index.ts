@@ -1,2 +1,2 @@
-import vitePlugins from "./vite"
+import vitePlugins from "./vite/index.js"
 export { vitePlugins }

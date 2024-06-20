@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
+    "allowJs": true,
     "declaration": true,
     "declarationDir": "dist/types",
     "importHelpers": true,
@@ -8,8 +9,8 @@
     "rootDir": "./src/apps/module",
     "strict": false,
     "resolveJsonModule": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "noEmit": false,
     "baseUrl": ".",
     "paths": {

@@ -1,5 +1,5 @@
 import { UserConfig } from "vite";
-import { basebuildCoreConfigSystemFnReturnViteConfig, BasebuildCoreConfigSystemFnViteOptions } from "./strategies/vite/types";
+import { basebuildCoreConfigSystemFnReturnViteConfig, BasebuildCoreConfigSystemFnViteOptions } from "./strategies/vite/types.js";
 
 export type BasebuildCoreConfigSystemFnOptions = BasebuildCoreConfigSystemFnViteOptions
 export type BasebuildCoreConfigSystemFnReturn = basebuildCoreConfigSystemFnReturnViteConfig

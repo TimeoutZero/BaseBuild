@@ -1,7 +1,7 @@
-import deepAssign from '../../../utils/deepAssign'
-import { UserConfig, loadEnv, ConfigEnv } from 'vite'
+import deepAssign from '../../../utils/deepAssign.js'
+import { ConfigEnv, UserConfig, loadEnv } from 'vite'
 import debug from 'debug'
-import { BasebuildCoreConfigs } from '../../types'
+import { BasebuildCoreConfigs } from '../../types.js'
 
 const log = debug('basebuild:vite-config')
 

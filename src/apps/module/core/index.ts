@@ -1,6 +1,6 @@
 import debug from 'debug'
 import { BasebuildCoreInitiazeOptions } from './types.js'
-import initializeStrategies from './strategies/index'
+import initializeStrategies from './strategies/index.js'
 
 const log = debug('basebuild:module:core')
 
