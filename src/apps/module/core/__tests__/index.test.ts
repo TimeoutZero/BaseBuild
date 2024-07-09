@@ -1,10 +1,13 @@
-import { it, expect } from '@jest/globals'
-import basebuildfy from '../index'
-import initializeStrategies from '../strategies/index'
+import { it, expect, jest } from '@jest/globals'
+import basebuildfy from '../index.js'
+import initializeStrategies from '../strategies/index.js'
 import test, { afterEach, beforeEach, describe } from 'node:test'
-import { ConfigEnv } from 'vite'
 
-const commonViteEnvObject: ConfigEnv = {
+
+const commonViteEnvObject: {
+  command: 'serve' | 'build'
+  mode: string
+} = {
   command: 'serve',
   mode: 'development'
 }
@@ -27,7 +30,7 @@ describe(`basebuildfy`, () => {
 
   describe(`when configSystem is not setted and fallsback to vite's ecosystem`, () => {
     describe(`and configs is not empty`, () => {
-      let viteSpy: jest.SpyInstance = null
+      let viteSpy
 
       afterEach(() => {
         viteSpy.mockReset()

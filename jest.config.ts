@@ -8,9 +8,8 @@ const config: Config = {
   testEnvironment: "node",
   clearMocks: true,
   coverageProvider: "v8",
-  preset: 'ts-jest',
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
-  testPathIgnorePatterns: ["/node_modules/", "/dist/", "/src/apps/legacy/"],
+  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.(js)$",
+  testPathIgnorePatterns: ["/node_modules/", "/src/apps/legacy/", ".d.ts"],
   reporters: ['default'],
 };
 
