@@ -1,4 +1,4 @@
-import { it, expect } from '@jest/globals'
+import { it, expect, jest } from '@jest/globals'
 import basebuildfy from '../index.js'
 import initializeStrategies from '../strategies/index.js'
 import test, { afterEach, beforeEach, describe } from 'node:test'
@@ -30,7 +30,7 @@ describe(`basebuildfy`, () => {
 
   describe(`when configSystem is not setted and fallsback to vite's ecosystem`, () => {
     describe(`and configs is not empty`, () => {
-      let viteSpy: jest.SpyInstance = null
+      let viteSpy
 
       afterEach(() => {
         viteSpy.mockReset()
