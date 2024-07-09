@@ -55,9 +55,9 @@
     "start": "yarn dev",
     "dev": "tsc -w",
     "prepublishOnly": "yarn build",
-    "build": "shx rm -rf dist && tsc -b",
+    "build": "shx rm -rf dist && tsc -b tsconfig.build.json",
     "prelink": "yarn build",
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --runInBand dist",
+    "test": "tsc && NODE_OPTIONS=--experimental-vm-modules npx jest --runInBand dist",
     "test:dev": "NODE_OPTIONS=--experimental-vm-modules npx jest --runInBand --watchAll dist",
     "test:debug": "node --experimental-vm-modules --inspect-brk node_modules/.bin/jest --runInBand --watchAll dist"
   },
@@ -72,7 +72,6 @@
     "@types/node": "20.11.28",
     "jest": "29.7.0",
     "shx": "0.3.4",
-    "ts-jest": "29.2.0",
     "ts-node": "10.9.2",
     "tslib": "2.6.3",
     "typescript": "5.5.3"
