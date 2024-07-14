@@ -57,11 +57,8 @@
     "prepublishOnly": "yarn build",
     "build": "shx rm -rf dist && tsc -b tsconfig.build.json",
     "prelink": "yarn build",
-    "vitest": "vitest",
-    "vitest:debug": "vitest --inspect-brk --pool threads --poolOptions.threads.singleThread",
-    "test": "tsc && NODE_OPTIONS=--experimental-vm-modules npx jest --runInBand dist",
-    "test:dev": "NODE_OPTIONS=--experimental-vm-modules npx jest --runInBand --watchAll dist",
-    "test:debug": "node --experimental-vm-modules --inspect-brk node_modules/.bin/jest --runInBand --watchAll dist"
+    "test": "vitest",
+    "test:debug": "vitest --inspect-brk --pool threads --poolOptions.threads.singleThread"
   },
   "dependencies": {
     "debug": "4.3.4",
