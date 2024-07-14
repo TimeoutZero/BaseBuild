@@ -69,6 +69,7 @@
     "@tsconfig/node20": "20.1.2",
     "@types/jest": "29.5.12",
     "@types/node": "20.11.28",
+    "create-docusaurus": "3.4.0",
     "shx": "0.3.4",
     "ts-node": "10.9.2",
     "tslib": "2.6.3",
