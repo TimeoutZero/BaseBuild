@@ -1,4 +1,4 @@
-import { it, expect, jest } from '@jest/globals'
+import { vi } from 'vitest'
 import basebuildfy from '../index.js'
 import initializeStrategies from '../strategies/index.js'
 import test, { afterEach, beforeEach, describe } from 'node:test'
@@ -12,7 +12,7 @@ const commonViteEnvObject: {
   mode: 'development'
 }
 
-const commonJestFnForObjectsParams = (args) => {
+const commonviFnForObjectsParams = (args) => {
   // Cria uma cópia profunda dos argumentos
   const argsCopy = JSON.parse(JSON.stringify(args))
 
@@ -24,7 +24,7 @@ describe(`basebuildfy`, () => {
 
   describe(`when configs array is empty`, () => {
     it(`throw an error`, () => {
-      expect(() => basebuildfy()).toThrowError('configs array is required')
+      expect(() => basebuildfy()).toThrow('configs array is required')
     })
   })
 
@@ -37,36 +37,36 @@ describe(`basebuildfy`, () => {
       })
 
       it(`basebuildfies a single vite's config object`, () => {
-        viteSpy = jest.spyOn(initializeStrategies, 'vite')
+        viteSpy = vi.spyOn(initializeStrategies, 'vite')
         const finalConfigFunction = basebuildfy({ configs: [{}] })
         const finalSettings = finalConfigFunction(commonViteEnvObject)
 
-        expect(viteSpy).toBeCalled()
+        expect(viteSpy).toHaveBeenCalled()
         expect(finalSettings).toMatchObject({})
       })
 
       it(`basebuildfies a single vite's config function`, () => {
-        viteSpy = jest.spyOn(initializeStrategies, 'vite')
+        viteSpy = vi.spyOn(initializeStrategies, 'vite')
 
-        const configFunction = jest.fn()
+        const configFunction = vi.fn()
 
         const finalConfigFunction = basebuildfy({ configs: [configFunction] })
         const finalSettings = finalConfigFunction(commonViteEnvObject)
 
-        expect(viteSpy).toBeCalled()
-        expect(configFunction).toBeCalledWith({ ...commonViteEnvObject, basebuildDefaults: {} })
+        expect(viteSpy).toHaveBeenCalled()
+        expect(configFunction).toHaveBeenCalledWith({ ...commonViteEnvObject, basebuildDefaults: {} })
         expect(finalSettings).toMatchObject({})
       })
 
       it(`basebuildfies multiple vite's config functions in a recursive/linear way`, () => {
-        viteSpy = jest.spyOn(initializeStrategies, 'vite')
+        viteSpy = vi.spyOn(initializeStrategies, 'vite')
 
         let savedArgs1 = null
-        const configFunction = jest.fn().mockImplementation((args) => {
+        const configFunction = vi.fn().mockImplementation((args) => {
           savedArgs1 = JSON.parse(JSON.stringify(args))
         })
         let savedArgs2 = null
-        const configFunction2 = jest.fn().mockImplementation((args) => {
+        const configFunction2 = vi.fn().mockImplementation((args) => {
           savedArgs2 = JSON.parse(JSON.stringify(args))
           return {
             build: {
@@ -75,7 +75,7 @@ describe(`basebuildfy`, () => {
           }
         })
         let savedArgs3 = null
-        const configFunction3 = jest.fn().mockImplementation((args) => {
+        const configFunction3 = vi.fn().mockImplementation((args) => {
           savedArgs3 = JSON.parse(JSON.stringify(args))
           return {
             build: {
@@ -87,7 +87,7 @@ describe(`basebuildfy`, () => {
         const finalConfigFunction = basebuildfy({ configs: [configFunction, configFunction2, configFunction3] })
         const finalSettings = finalConfigFunction(commonViteEnvObject)
 
-        expect(viteSpy).toBeCalled()
+        expect(viteSpy).toHaveBeenCalled()
         expect(savedArgs1).toMatchObject({ ...commonViteEnvObject, basebuildDefaults: {} })
         expect(savedArgs2).toMatchObject({ ...commonViteEnvObject, basebuildDefaults: {} })
         expect(savedArgs3).toMatchObject({ ...commonViteEnvObject, basebuildDefaults: { build: { minify: 'esbuild' } } })
