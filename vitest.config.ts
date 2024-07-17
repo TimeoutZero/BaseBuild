@@ -9,10 +9,7 @@ export default defineConfig({
     }
   },
   test: {
-    // Opções de configuração do Vitest
     globals: true,
     environment: 'node',
-    // Outras configurações específicas do projeto
-    exclude: ['**/node_modules/**', '**/dist/**', './src/apps/legacy/**'],
   },
 })
