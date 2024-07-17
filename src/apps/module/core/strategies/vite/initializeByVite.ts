@@ -1,9 +1,9 @@
 import { UserConfigFnObject, defineConfig } from "vite"
-import buildBasebuildViteConfigFunction from "./vite.config.js"
+import { mergeViteConfigs } from "./merge.js"
 import { BasebuildCoreConfigs } from "../../../core/types.js"
 
 const initializeByVite = (configs: BasebuildCoreConfigs): UserConfigFnObject => {
-  const bbViteConfigFunction = buildBasebuildViteConfigFunction(configs)
+  const bbViteConfigFunction = mergeViteConfigs(configs)
   const finalViteConfig = defineConfig(bbViteConfigFunction)
   return finalViteConfig
 }
