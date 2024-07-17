@@ -1,7 +1,9 @@
-import initializeByVite from "./vite/initializeByVite.js";
+import initializeByVite from "./vite/initializeByVite.js"
+import initializeByVitest from "./vitest/initializeByVitest.js"
 
 const initializeStrategies = {
-  vite: initializeByVite
+  vite: initializeByVite,
+  vitest: initializeByVitest
 }
 
 export { initializeStrategies }

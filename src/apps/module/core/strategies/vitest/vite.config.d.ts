@@ -1,0 +1,1 @@
+export { UserConfig as VitestUserConfig } from 'vitest/config'
