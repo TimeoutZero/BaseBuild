@@ -1,2 +1,0 @@
-
-require('./gulp/unitTests.js')();
