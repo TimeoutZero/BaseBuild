@@ -54,7 +54,7 @@ describe(`basebuildfy`, () => {
         const finalSettings = finalConfigFunction(commonViteEnvObject)
 
         expect(viteSpy).toHaveBeenCalled()
-        expect(configFunction).toHaveBeenCalledWith({ ...commonViteEnvObject, basebuildDefaults: {} })
+        expect(configFunction).toHaveBeenCalledWith({ ...commonViteEnvObject, basebuild: { defaults: {} } })
         expect(finalSettings).toMatchObject({})
       })
 
@@ -88,9 +88,13 @@ describe(`basebuildfy`, () => {
         const finalSettings = finalConfigFunction(commonViteEnvObject)
 
         expect(viteSpy).toHaveBeenCalled()
-        expect(savedArgs1).toMatchObject({ ...commonViteEnvObject, basebuildDefaults: {} })
-        expect(savedArgs2).toMatchObject({ ...commonViteEnvObject, basebuildDefaults: {} })
-        expect(savedArgs3).toMatchObject({ ...commonViteEnvObject, basebuildDefaults: { build: { minify: 'esbuild' } } })
+        expect(savedArgs1).toMatchObject({ ...commonViteEnvObject, basebuild: { defaults: {} } })
+        expect(savedArgs2).toMatchObject({ ...commonViteEnvObject, basebuild: { defaults: {} } })
+        expect(savedArgs3).toMatchObject({ ...commonViteEnvObject,
+          basebuild: {
+            defaults: { build: { minify: 'esbuild' } }
+          }
+        })
         expect(finalSettings).toMatchObject({
           build: {
             minify: 'esbuild',
