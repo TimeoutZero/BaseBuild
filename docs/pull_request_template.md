@@ -1,14 +1,14 @@
-# 📦 O QUÊ
+# 📦 WHAT
 
 
-# 🧐 O PORQUÊ
+# 🧐 WHY
 
 
-# 🎯 COMO
+# 🎯 HOW
 
 
-# 🎇 Imagens
+# 🎇 IMAGES
 
-`Antes`
+`BEFORE`
 
-`Depois`
+`AFTER`
