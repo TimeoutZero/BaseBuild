@@ -14,6 +14,6 @@ export interface ConfigSystemFnOptions<T> extends T {
 }
 
 export type ConfigSystemInitializer<T> = (configs: EcosystemConfigs) => T
-export type MergeConfigsFn<T> = (configs: EcosystemConfigs) => T
+export type ConfigSystemMerger<T> = (configs: EcosystemConfigs) => T
 
 

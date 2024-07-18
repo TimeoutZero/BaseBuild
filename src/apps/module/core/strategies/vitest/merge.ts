@@ -1,12 +1,12 @@
 import deepAssign from '../../../utils/deepAssign.js'
 import { ConfigEnv, UserConfig, UserConfigFnObject } from 'vitest/config'
 import debug from 'debug'
-import { MergeConfigsFn } from '../../types.js'
+import { ConfigSystemMerger } from '../../types.js'
 import getDefaultBasebuildVitestConfig from './vite.config.js'
 
 const log = debug('basebuild:vite:merge')
 
-export const mergeVitestConfigs: MergeConfigsFn<UserConfigFnObject> = (configs) => {
+export const mergeVitestConfigs: ConfigSystemMerger<UserConfigFnObject> = (configs) => {
   return (configEnv: ConfigEnv): UserConfig => {
     const bbDefaultViteConfig = getDefaultBasebuildVitestConfig(configEnv)
 
