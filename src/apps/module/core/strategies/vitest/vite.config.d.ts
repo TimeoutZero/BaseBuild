@@ -1,1 +1,4 @@
-export { UserConfig as VitestUserConfig } from 'vitest/config'
+export {
+  UserConfig as VitestUserConfig,
+  UserConfigFnObject as VitestConfigFnObject
+} from 'vitest/config'

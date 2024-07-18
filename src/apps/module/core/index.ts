@@ -1,5 +1,5 @@
 import debug from 'debug'
-import { BasebuildCoreInitiazeOptions } from './types.js'
+import { BasebuildCoreInitiazeOptions, ConfigSystemInitializer } from './types.js'
 import initializeStrategies from './strategies/index.js'
 
 const log = debug('basebuild:module:core')
@@ -10,7 +10,7 @@ export const basebuildfy = (inializeOptions: BasebuildCoreInitiazeOptions = { co
     throw new Error('configs array is required')
   }
 
-  const strategy = initializeStrategies[configSystem]
+  const strategy: ConfigSystemInitializer<any> = initializeStrategies[configSystem]
   const finalViteConfig = strategy(inializeOptions?.configs)
 
   log('finalViteConfig', finalViteConfig)

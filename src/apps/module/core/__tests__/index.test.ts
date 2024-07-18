@@ -2,26 +2,23 @@ import { vi } from 'vitest'
 import basebuildfy from '../index.js'
 import initializeStrategies from '../strategies/index.js'
 import test, { afterEach, beforeEach, describe } from 'node:test'
+import { ConfigEnv } from 'vite'
+import { ConfigEnv as ConfigEnvVitest } from 'vitest/config'
 
 
-const commonViteEnvObject: {
-  command: 'serve' | 'build'
-  mode: string
-} = {
+const commonViteEnv: ConfigEnv = {
   command: 'serve',
   mode: 'development'
 }
 
-const commonviFnForObjectsParams = (args) => {
-  // Cria uma cópia profunda dos argumentos
-  const argsCopy = JSON.parse(JSON.stringify(args))
-
-  // Retorna uma função que quando chamada, retorna a cópia dos argumentos
-  return () => argsCopy
+const commonVitestEnv: ConfigEnvVitest = {
+  command: 'serve',
+  mode: 'development'
 }
 
 describe(`basebuildfy`, () => {
 
+  //#region default
   describe(`when configs array is empty`, () => {
     it(`throw an error`, () => {
       expect(() => basebuildfy()).toThrow('configs array is required')
@@ -39,7 +36,7 @@ describe(`basebuildfy`, () => {
       it(`basebuildfies a single vite's config object`, () => {
         viteSpy = vi.spyOn(initializeStrategies, 'vite')
         const finalConfigFunction = basebuildfy({ configs: [{}] })
-        const finalSettings = finalConfigFunction(commonViteEnvObject)
+        const finalSettings = finalConfigFunction(commonViteEnv)
 
         expect(viteSpy).toHaveBeenCalled()
         expect(finalSettings).toMatchObject({})
@@ -51,10 +48,10 @@ describe(`basebuildfy`, () => {
         const configFunction = vi.fn()
 
         const finalConfigFunction = basebuildfy({ configs: [configFunction] })
-        const finalSettings = finalConfigFunction(commonViteEnvObject)
+        const finalSettings = finalConfigFunction(commonViteEnv)
 
         expect(viteSpy).toHaveBeenCalled()
-        expect(configFunction).toHaveBeenCalledWith({ ...commonViteEnvObject, basebuild: { defaults: {} } })
+        expect(configFunction).toHaveBeenCalledWith({ ...commonViteEnv, basebuild: { defaults: {} } })
         expect(finalSettings).toMatchObject({})
       })
 
@@ -85,12 +82,12 @@ describe(`basebuildfy`, () => {
         })
 
         const finalConfigFunction = basebuildfy({ configs: [configFunction, configFunction2, configFunction3] })
-        const finalSettings = finalConfigFunction(commonViteEnvObject)
+        const finalSettings = finalConfigFunction(commonViteEnv)
 
         expect(viteSpy).toHaveBeenCalled()
-        expect(savedArgs1).toMatchObject({ ...commonViteEnvObject, basebuild: { defaults: {} } })
-        expect(savedArgs2).toMatchObject({ ...commonViteEnvObject, basebuild: { defaults: {} } })
-        expect(savedArgs3).toMatchObject({ ...commonViteEnvObject,
+        expect(savedArgs1).toMatchObject({ ...commonViteEnv, basebuild: { defaults: {} } })
+        expect(savedArgs2).toMatchObject({ ...commonViteEnv, basebuild: { defaults: {} } })
+        expect(savedArgs3).toMatchObject({ ...commonViteEnv,
           basebuild: {
             defaults: { build: { minify: 'esbuild' } }
           }
@@ -99,6 +96,84 @@ describe(`basebuildfy`, () => {
           build: {
             minify: 'esbuild',
             outDir: './dist',
+          }
+        })
+      })
+    })
+  })
+
+  // #region vitest
+  describe(`when configSystem is setted to vitest`, () => {
+    describe(`and configs is not empty`, () => {
+      let vitestSpy
+
+      afterEach(() => {
+        vitestSpy.mockReset()
+      })
+
+      it(`basebuildfies a single vitest's config object`, () => {
+        vitestSpy = vi.spyOn(initializeStrategies, 'vitest')
+        const finalConfigFunction = basebuildfy({ configSystem: 'vitest', configs: [{ globals: false }] })
+        const finalSettings = finalConfigFunction(commonViteEnv)
+
+        expect(vitestSpy).toHaveBeenCalled()
+        expect(finalSettings).toMatchObject({})
+      })
+
+      it(`basebuildfies a single vitest's config function`, () => {
+        vitestSpy = vi.spyOn(initializeStrategies, 'vitest')
+
+        const configFunction = vi.fn()
+
+        const finalConfigFunction = basebuildfy({ configSystem: 'vitest', configs: [configFunction] })
+        const finalSettings = finalConfigFunction(commonViteEnv)
+
+        expect(vitestSpy).toHaveBeenCalled()
+        expect(configFunction).toHaveBeenCalledWith({ ...commonViteEnv, basebuild: { defaults: {} } })
+        expect(finalSettings).toMatchObject({})
+      })
+
+      it(`basebuildfies multiple vitest's config functions in a recursive/linear way`, () => {
+        vitestSpy = vi.spyOn(initializeStrategies, 'vitest')
+
+        let savedArgs1 = null
+        const configFunction = vi.fn().mockImplementation((args) => {
+          savedArgs1 = JSON.parse(JSON.stringify(args))
+        })
+        let savedArgs2 = null
+        const configFunction2 = vi.fn().mockImplementation((args) => {
+          savedArgs2 = JSON.parse(JSON.stringify(args))
+          return {
+            test: {
+              globals: true,
+            }
+          }
+        })
+        let savedArgs3 = null
+        const configFunction3 = vi.fn().mockImplementation((args) => {
+          savedArgs3 = JSON.parse(JSON.stringify(args))
+          return {
+            test: {
+              environment: 'jsdom',
+            }
+          }
+        })
+
+        const finalConfigFunction = basebuildfy({ configSystem: 'vitest', configs: [configFunction, configFunction2, configFunction3] })
+        const finalSettings = finalConfigFunction(commonViteEnv)
+
+        expect(vitestSpy).toHaveBeenCalled()
+        expect(savedArgs1).toMatchObject({ ...commonViteEnv, basebuild: { defaults: {} } })
+        expect(savedArgs2).toMatchObject({ ...commonViteEnv, basebuild: { defaults: {} } })
+        expect(savedArgs3).toMatchObject({
+          ...commonViteEnv,
+          basebuild: {
+            defaults: { test: { globals: true } }
+          }
+        })
+        expect(finalSettings).toMatchObject({
+          test: {
+            globals: true,
           }
         })
       })

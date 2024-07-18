@@ -1,3 +1,5 @@
+import { UserConfigFnObject } from "vite"
+import { ConfigSystemInitializer, ConfigSystemName } from "../types.js"
 import initializeByVite from "./vite/initializeByVite.js"
 import initializeByVitest from "./vitest/initializeByVitest.js"
 
