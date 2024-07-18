@@ -4,7 +4,7 @@ export interface BasebuildCoreInitiazeOptions {
   configs: EcosystemConfigs
 }
 
-export type EcosystemConfigs = Array<ConfigSystemFnOptions<T> | ConfigSystemFn<T> | ConfigSystemFn<T, K>>
+export type EcosystemConfigs = Array<ConfigSystemFnOptions<T> | ConfigSystemFn<T>>
 export type ConfigSystemName = 'vite' | 'vitest'
 export type ConfigSystemFn<T> = (options: ConfigSystemFnOptions<T>) => T
 export interface ConfigSystemFnOptions<T> extends T {
