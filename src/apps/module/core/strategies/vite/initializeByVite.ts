@@ -1,6 +1,6 @@
 import { UserConfig, UserConfigFnObject, defineConfig } from "vite"
 import { mergeViteConfigs } from "./merge.js"
-import { ConfigSystemInitializer, EcosystemConfigs } from "../../../core/types.js"
+import { ConfigSystemInitializer } from "../../../core/types.js"
 
 const initializeByVite: ConfigSystemInitializer<UserConfigFnObject> = (configs) => {
   const bbViteConfigFunction = mergeViteConfigs(configs)
