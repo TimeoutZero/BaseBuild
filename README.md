@@ -48,12 +48,13 @@ basebuild will have strategies to different ecosystems and for now we're startin
 `To only aggregate config objects or config functions`
 ```typescript
 import basebuild from '@bebasebuild/basebuild'
+import { UserConfigFnObject } from 'vite'
 
-basebuild({
+basebuild<UserConfigFnObject>({
   configSystem: 'vite',
   configs: [
     configFunction1,
-    configObject2,
+    configFunction2,
     configFunction3,
   ]
 })
@@ -66,24 +67,24 @@ basebuild({
   ```typescript
     import basebuild from '@bebasebuild/basebuild'
     import vue from '@vitejs/plugin-vue'
-    import { UserConfig } from 'vite'
+    import { UserConfigFnObject } from 'vite'
 
-    export const basebuildVue = (userConfig: UserConfig) => {
+    export const basebuildVue = (userConfigFn) => {
 
-      const bbVueConfigFn = ({ command, basebuildDefaults }) => {
+      const bbVueConfigFn = ({ command, basebuild }) => {
         return {
           plugins: [
-            ...basebuildDefaults.plugins, // rollup-plugin-copy plugin
+            ...basebuild.defaults.plugins, // rollup-plugin-copy plugin
             vue()
           ]
         }
       }
 
-      return basebuild({
+      return basebuild<UserConfigFnObject>({
         configSystem: 'vite',
         configs: [
           bbVueConfigFn,
-          userConfig
+          userConfigFn
         ]
       })
     }
@@ -94,16 +95,16 @@ basebuild({
 
 
 <details>
-  <summary>To use the basebuild child project in vite.config.ts</summary>
+  <summary>To use the basebuild child project in vite.config.ts of any other projects</summary>
 
   ```typescript
     import basebuildVue from '@bebasebuild/basebuild-vue'
     import { splitVendorChunkPlugin } from 'vite'
 
-    export default basebuildVue(({ command, basebuildDefaults }) => {
+    export default basebuildVue(({ command, basebuild }) => {
       return {
         plugins: [
-          ...basebuildDefaults.plugins,
+          ...basebuild.defaults.plugins,
           splitVendorChunkPlugin()
         ] // now it should be [rollup-plugin-copy, vite-plugin-vue, vite-plugin-split-vendor-chunk]
       }

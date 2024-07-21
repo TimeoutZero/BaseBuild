@@ -6,6 +6,12 @@
     "allowJs": true,
     "declaration": true,
     "declarationDir": "dist/types",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/apps/module",
+      "dist/types",
+      "./node_modules"
+    ],
     "importHelpers": true,
     "outDir": "dist",
     "rootDir": "./src/apps/module",

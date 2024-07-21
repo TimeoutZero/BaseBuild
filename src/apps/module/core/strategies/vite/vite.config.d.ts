@@ -1,1 +1,4 @@
-export { UserConfig as ViteUserConfig } from 'vite'
+export {
+  UserConfig as ViteUserConfig,
+  UserConfigFnObject as ViteConfigFnObject
+} from 'vite'
