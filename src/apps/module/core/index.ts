@@ -4,7 +4,7 @@ import initializeStrategies from './strategies/index.js'
 
 const log = debug('basebuild:module:core')
 
-export const basebuildfy: BasebuildCoreInitializer = <T, K>(options: BasebuildCoreInitiazerOptions<T>) => {
+export const basebuildfy: BasebuildCoreInitializer = <T>(options: BasebuildCoreInitiazerOptions<T>) => {
   const configSystem = options?.configSystem || 'vite'
   if (!options?.configs?.length) {
     throw new Error('configs array is required')
