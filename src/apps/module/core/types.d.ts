@@ -1,19 +1,28 @@
 
-export interface BasebuildCoreInitiazeOptions {
-  configSystem?: ConfigSystemName
-  configs: ConfigSystemSetting[]
+export type BasebuildCoreInitializer = {
+  <T>(options: BasebuildCoreInitiazerOptions<T>): T;
 }
 
-export type ConfigSystemSetting = ConfigSystemFnOptions<T> | ConfigSystemFn<T>
+export interface BasebuildCoreInitiazerOptions<T> {
+  configSystem?: ConfigSystemName;
+  configs: ConfigSystemFn<T>[]
+}
+
+
+// export type ConfigSystemSetting<T> = ConfigSystemFn<T>
 export type ConfigSystemName = 'vite' | 'vitest'
-export type ConfigSystemFn<T> = (options: ConfigSystemFnOptions<T>) => T
-export interface ConfigSystemFnOptions<T> extends T {
-  basebuild: {
-    defaults: T
+
+type FirstParam<T extends (...args: any) => any> = Parameters<T>[0]
+export interface ConfigSystemFnBBOptions<T> {
+  basebuild?: {
+    defaults?: ReturnType<T>
   }
 }
+export type ConfigSystemFnOptions<T> = FirstParam<T> & ConfigSystemFnBBOptions<T>
+export type ConfigSystemFn<T extends (...args: any) => any> = (options: ConfigSystemFnOptions<T>) => ReturnType<T>
 
-export type ConfigSystemInitializer<T> = (configs: ConfigSystemSetting[]) => T
-export type ConfigSystemMerger<T> = (configs: ConfigSystemSetting[]) => T
+
+export type ConfigSystemInitializer<T> = (configs: ConfigSystemFn<T>[]) => T
+export type ConfigSystemMerger<T, K> = (configs: ConfigSystemFn<T>[]) => K
 
 

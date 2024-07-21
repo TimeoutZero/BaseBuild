@@ -6,7 +6,7 @@ import getDefaultBasebuildViteConfig from './vite.config.js'
 
 const log = debug('basebuild:vite:merge')
 
-export const mergeViteConfigs: ConfigSystemMerger<UserConfigFnObject>  = (configs) => {
+export const mergeViteConfigs = (configs) => {
   return (configEnv: ConfigEnv): UserConfig => {
     const bbDefaultViteConfig = getDefaultBasebuildViteConfig(configEnv)
 
