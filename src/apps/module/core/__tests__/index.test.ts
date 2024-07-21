@@ -1,5 +1,5 @@
-import { UserConfig, vi } from 'vitest'
-import { UserConfig as VitestUserConfig } from 'vitest/config'
+import { Mock, UserConfig, vi } from 'vitest'
+import { UserConfig as VitestUserConfig, UserConfigFnObject as VitestViteConfigFnObject } from 'vitest/config'
 import basebuildfy from '../index.js'
 import initializeStrategies from '../strategies/index.js'
 import test, { afterEach, beforeEach, describe } from 'node:test'
@@ -36,8 +36,8 @@ describe(`basebuildfy`, () => {
 
       it(`basebuildfies a single vite's config object`, () => {
         viteSpy = vi.spyOn(initializeStrategies, 'vite')
-        const finalSettings = basebuildfy<ViteUserConfig>({ configs: [{}] })
-        // const finalSettings = finalConfigFunction(developmentViteEnv)
+        const finalConfigFunction = basebuildfy<ViteConfigFnObject>({ configs: [({ basebuild }) => { return {} }] })
+        const finalSettings = finalConfigFunction(developmentViteEnv)
 
         expect(viteSpy).toHaveBeenCalled()
         expect(finalSettings).toMatchObject({})
@@ -48,7 +48,7 @@ describe(`basebuildfy`, () => {
 
         const configFunction = vi.fn()
 
-        const finalConfigFunction = basebuildfy({ configs: [configFunction] })
+        const finalConfigFunction = basebuildfy<ViteConfigFnObject>({ configs: [configFunction] })
         const finalSettings = finalConfigFunction(developmentViteEnv)
 
         expect(viteSpy).toHaveBeenCalled()
@@ -82,7 +82,7 @@ describe(`basebuildfy`, () => {
           }
         })
 
-        const finalConfigFunction = basebuildfy({ configs: [configFunction, configFunction2, configFunction3] })
+        const finalConfigFunction = basebuildfy<Mock>({ configs: [configFunction, configFunction2, configFunction3] })
         const finalSettings = finalConfigFunction(developmentViteEnv)
 
         expect(viteSpy).toHaveBeenCalled()
@@ -114,8 +114,8 @@ describe(`basebuildfy`, () => {
 
       it(`basebuildfies a single vitest's config object`, () => {
         vitestSpy = vi.spyOn(initializeStrategies, 'vitest')
-        const finalSettings = basebuildfy<VitestUserConfig>({ configSystem: 'vitest', configs: [{}] })
-        // const finalSettings = finalConfigFunction(developmentVitestEnv)
+        const finalConfigFunction = basebuildfy<VitestViteConfigFnObject>({ configSystem: 'vitest', configs: [() => { return {} }] })
+        const finalSettings = finalConfigFunction(developmentVitestEnv)
 
         expect(vitestSpy).toHaveBeenCalled()
         expect(finalSettings).toMatchObject({})
@@ -126,7 +126,7 @@ describe(`basebuildfy`, () => {
 
         const configFunction = vi.fn()
 
-        const finalConfigFunction = basebuildfy({ configSystem: 'vitest', configs: [configFunction] })
+        const finalConfigFunction = basebuildfy<VitestViteConfigFnObject>({ configSystem: 'vitest', configs: [configFunction] })
         const finalSettings = finalConfigFunction(developmentVitestEnv)
 
         expect(vitestSpy).toHaveBeenCalled()
@@ -160,7 +160,7 @@ describe(`basebuildfy`, () => {
           }
         })
 
-        const finalConfigFunction = basebuildfy({ configSystem: 'vitest', configs: [configFunction, configFunction2, configFunction3] })
+        const finalConfigFunction = basebuildfy<VitestViteConfigFnObject>({ configSystem: 'vitest', configs: [configFunction, configFunction2, configFunction3] })
         const finalSettings = finalConfigFunction(developmentViteEnv)
 
         expect(vitestSpy).toHaveBeenCalled()
