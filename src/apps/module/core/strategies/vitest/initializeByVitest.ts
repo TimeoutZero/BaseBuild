@@ -1,6 +1,6 @@
 import { UserConfigFnObject as VitestConfigFnObject, defineConfig } from "vitest/config"
 import { mergeVitestConfigs } from "./merge.js"
-import { ConfigSystemInitializer } from "../../types.d.js"
+import { ConfigSystemInitializer } from "../../types.js"
 
 const initializeByVitest: ConfigSystemInitializer<VitestConfigFnObject> = (configs) => {
   const bbViteConfigFunction = mergeVitestConfigs(configs)

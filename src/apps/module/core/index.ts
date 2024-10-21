@@ -1,10 +1,10 @@
 import debug from 'debug'
-import { BasebuildCoreInitializer, BasebuildCoreInitiazerOptions, ConfigSystemFn, ConfigSystemInitializer } from './types.js'
+import { BasebuildCoreInitializer, BasebuildCoreInitializerOptions, ConfigSystemFn, ConfigSystemInitializer, GenericFunction } from './types.js'
 import initializeStrategies from './strategies/index.js'
 
 const log = debug('basebuild:module:core')
 
-export const basebuildfy: BasebuildCoreInitializer = <T>(options: BasebuildCoreInitiazerOptions<T>) => {
+export const basebuildfy: BasebuildCoreInitializer = <T extends GenericFunction>(options: BasebuildCoreInitializerOptions<T>) => {
   const configSystem = options?.configSystem || 'vite'
   if (!options?.configs?.length) {
     throw new Error('configs array is required')
